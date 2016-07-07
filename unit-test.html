@@ -40,7 +40,12 @@
     });
 
     // #3. Import the spec file explicitly
-    System.import('app/registration-form/custom-validators.spec')
+    Promise.all([
+        System.import('app/registration-form/custom-validators.spec'),
+        System.import('app/registration-form/registration-form.component.spec')
+    ])
+//    System.import('app/registration-form/custom-validators.spec'),
+//            System.import('app/registration-form/registration-form.component.spec')
 
     // #4. wait for all imports to load ...
     //     then re-execute `window.onload` which

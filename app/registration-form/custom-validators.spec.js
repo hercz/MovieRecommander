@@ -1,5 +1,4 @@
 "use strict";
-///<reference path="../../node_modules/@angular/core/testing/testing.d.ts"/>
 var custom_validators_1 = require('./custom-validators');
 var common_1 = require("@angular/common");
 var testing_1 = require('@angular/core/testing');
@@ -141,6 +140,20 @@ testing_1.describe("CustomValidator test passwordFormat method", function () {
         var message = new common_1.Control('AAAa1111');
         var testName = custom_validators_1.CustomValidators.passwordFormat(message);
         testing_1.expect(testName).toEqual(null);
+    });
+});
+testing_1.describe("CustomValidator test matchingPassword method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the matching of the two given passwords", function () {
+        var passwordObject = new common_1.Control('AAAa1111');
+        var confirmPasswordObject = new common_1.Control('AAAa111');
+        var group = new common_1.ControlGroup({
+            password: passwordObject,
+            confirmPassword: confirmPasswordObject
+        });
+        var passwordTester = custom_validators_1.matchingPasswords("password", "confirmPassword");
+        var result = passwordTester(group);
+        testing_1.expect(result["mismatchedPasswords"]).toEqual(true);
     });
 });
 testing_1.describe('1st tests', function () {

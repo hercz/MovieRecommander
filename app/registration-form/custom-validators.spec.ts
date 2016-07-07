@@ -1,6 +1,5 @@
-///<reference path="../../node_modules/@angular/core/testing/testing.d.ts"/>
-import {CustomValidators} from './custom-validators';
-import {Control} from "@angular/common";
+import {CustomValidators, matchingPasswords} from './custom-validators';
+import {Control, ControlGroup} from "@angular/common";
 import {
     describe,
     expect,
@@ -163,6 +162,22 @@ describe("CustomValidator test passwordFormat method", () => {
         expect(testName).toEqual(null);
     });
 });
+
+describe("CustomValidator test matchingPassword method", () => {
+    beforeEachProviders(() => [CustomValidators])
+    it("should test the matching of the two given passwords" , function() {
+        var passwordObject: Control = new Control('AAAa1111');
+        var confirmPasswordObject: Control = new Control('AAAa111');
+        var group: ControlGroup = new  ControlGroup({
+            password: passwordObject,
+            confirmPassword: confirmPasswordObject
+        })
+        var passwordTester = matchingPasswords("password","confirmPassword");
+        var result = passwordTester(group);
+        expect(result["mismatchedPasswords"]).toEqual(true);
+    });
+});
+
 
 describe('1st tests', () => {
     it(" is a 'test' test - Eredeti File", function() {

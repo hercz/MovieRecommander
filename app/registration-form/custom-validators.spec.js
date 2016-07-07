@@ -99,8 +99,52 @@ testing_1.describe("CustomValidator test passwordFormat method", function () {
         testing_1.expect(testName).toEqual(Object({ passwordFormat: true }));
     });
 });
+// In this case we have to test the false case with true value (the production code is correct the test is correct)
+testing_1.describe("CustomValidator test passwordFormat method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the validation of the 'passwordFormat' method with just letters", function () {
+        var message = new common_1.Control('aaaaaaaaaaaaaaaa');
+        var testName = custom_validators_1.CustomValidators.passwordFormat(message);
+        testing_1.expect(testName).toEqual(Object({ passwordFormat: true }));
+    });
+});
+// In this case we have to test the false case with true value (the production code is correct the test is correct)
+testing_1.describe("CustomValidator test passwordFormat method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the validation of the 'passwordFormat' method with numbers", function () {
+        var message = new common_1.Control('11111111111');
+        var testName = custom_validators_1.CustomValidators.passwordFormat(message);
+        testing_1.expect(testName).toEqual(Object({ passwordFormat: true }));
+    });
+});
+// In this case we have to test the false case with true value (the production code is correct the test is correct)
+testing_1.describe("CustomValidator test passwordFormat method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the validation of the 'passwordFormat' method with lowercase letters and numbers", function () {
+        var message = new common_1.Control('aaaaaa11111');
+        var testName = custom_validators_1.CustomValidators.passwordFormat(message);
+        testing_1.expect(testName).toEqual(Object({ passwordFormat: true }));
+    });
+});
+// In this case we have to test the false case with true value (the production code is correct the test is correct)
+testing_1.describe("CustomValidator test passwordFormat method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the validation of the 'passwordFormat' method with uppercase letters and numbers", function () {
+        var message = new common_1.Control('AAAA1111');
+        var testName = custom_validators_1.CustomValidators.passwordFormat(message);
+        testing_1.expect(testName).toEqual(Object({ passwordFormat: true }));
+    });
+});
+testing_1.describe("CustomValidator test passwordFormat method", function () {
+    testing_1.beforeEachProviders(function () { return [custom_validators_1.CustomValidators]; });
+    testing_1.it("should test the validation of the 'passwordFormat' method with correct value", function () {
+        var message = new common_1.Control('AAAa1111');
+        var testName = custom_validators_1.CustomValidators.passwordFormat(message);
+        testing_1.expect(testName).toEqual(null);
+    });
+});
 testing_1.describe('1st tests', function () {
-    testing_1.it("The 'toMatch' matcher is for regular expressions- Eredeti File", function () {
+    testing_1.it(" is a 'test' test - Eredeti File", function () {
         var message = "Balazs3";
         testing_1.expect(message).not.toMatch(/quux/);
     });

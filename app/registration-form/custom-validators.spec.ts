@@ -1,6 +1,5 @@
-///<reference path="../../node_modules/@angular/core/testing/testing.d.ts"/>
-import {CustomValidators} from './custom-validators';
-import {Control} from "@angular/common";
+import {CustomValidators, matchingPasswords} from './custom-validators';
+import {Control, ControlGroup} from "@angular/common";
 import {
     describe,
     expect,
@@ -8,47 +7,32 @@ import {
     beforeEachProviders,
 } from '@angular/core/testing';
 
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test nameFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
-    it("should test the validation of the 'nameFormat' method with false value(number)", function() {
+
+describe("CustomValidator test: nameFormat method", () => {
+    beforeEachProviders(() => [CustomValidators]);
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
+    it("should test the validation of the 'nameFormat' method with incorrect value(number)", function() {
         var message: Control = new Control('Balazs3');
         var testName = CustomValidators.nameFormat(message);
         expect(testName).toEqual(Object({ nameFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test nameFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'nameFormat' method with blank field", function() {
         var message: Control = new Control('');
         var testName = CustomValidators.nameFormat(message);
         expect(testName).toEqual(Object({ nameFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test nameFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'nameFormat' method with special character", function() {
         var message: Control = new Control('balazs!');
         var testName = CustomValidators.nameFormat(message);
         expect(testName).toEqual(Object({ nameFormat: true }));
     });
-});
-
-describe("CustomValidator test nameFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
     it("should test the validation of the 'nameFormat' method with correct value", function() {
         var message: Control = new Control('Balazs');
         var testName = CustomValidators.nameFormat(message);
         expect(testName).toEqual(null);
     });
-});
-
-describe("CustomValidator test nameFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
     it("should test the validation of the 'nameFormat' method with correct value(using dash)", function() {
         var message: Control = new Control('Kis-Nagy');
         var testName = CustomValidators.nameFormat(message);
@@ -56,38 +40,26 @@ describe("CustomValidator test nameFormat method", () => {
     });
 });
 
-// In this case we have to test the true case with false value (the production code is correct the test is correct)
-describe("CustomValidator test  emailFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+describe("CustomValidator test: emailFormat method", () => {
+    beforeEachProviders(() => [CustomValidators]);
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'emailFormat' method with blank field", function() {
         var message: Control = new Control('');
         var testName = CustomValidators.emailFormat(message);
         expect(testName).toEqual(Object({ emailFormat: true }));
     });
-});
-
-// In this case we have to test the true case with false value (the production code is correct the test is correct)
-describe("CustomValidator test  emailFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
-    it("should test the validation of the 'emailFormat' method with false value(without @)", function() {
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
+    it("should test the validation of the 'emailFormat' method with incorrect value(without @)", function() {
         var message: Control = new Control('balazsgmail.com');
         var testName = CustomValidators.emailFormat(message);
         expect(testName).toEqual(Object({ emailFormat: true }));
     });
-});
-
-// In this case we have to test the true case with false value (the production code is correct the test is correct)
-describe("CustomValidator test  emailFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
-    it("should test the validation of the 'emailFormat' method with false value(without dot)", function() {
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
+    it("should test the validation of the 'emailFormat' method with incorrect value(without dot)", function() {
         var message: Control = new Control('balazs@gmail');
         var testName = CustomValidators.emailFormat(message);
         expect(testName).toEqual(Object({ emailFormat: true }));
     });
-});
-
-describe("CustomValidator test emailFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
     it("should test the validation of the 'emailFormat' method with correct value", function() {
         var message: Control = new Control('balazs@gmail.com');
         var testName = CustomValidators.emailFormat(message);
@@ -95,67 +67,44 @@ describe("CustomValidator test emailFormat method", () => {
     });
 });
 
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+describe("CustomValidator test: passwordFormat method", () => {
+    beforeEachProviders(() => [CustomValidators]);
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with blank field", function() {
         var message: Control = new Control('');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with short value", function() {
         var message: Control = new Control('a');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with just letters", function() {
         var message: Control = new Control('aaaaaaaaaaaaaaaa');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with numbers", function() {
         var message: Control = new Control('11111111111');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with lowercase letters and numbers", function() {
         var message: Control = new Control('aaaaaa11111');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-// In this case we have to test the false case with true value (the production code is correct the test is correct)
-describe("CustomValidator test passwordFormat method", () => {
-    beforeEachProviders(() => [CustomValidators])
+    // In this case we have to test the false case with true value (the production code is correct the test is correct)
     it("should test the validation of the 'passwordFormat' method with uppercase letters and numbers", function() {
         var message: Control = new Control('AAAA1111');
         var testName = CustomValidators.passwordFormat(message);
         expect(testName).toEqual(Object({ passwordFormat: true }));
     });
-});
-
-describe("CustomValidator test passwordFormat method", () => {
     beforeEachProviders(() => [CustomValidators])
     it("should test the validation of the 'passwordFormat' method with correct value", function() {
         var message: Control = new Control('AAAa1111');
@@ -164,7 +113,34 @@ describe("CustomValidator test passwordFormat method", () => {
     });
 });
 
-describe('1st tests', () => {
+describe("CustomValidator test matchingPassword method", () => {
+    beforeEachProviders(() => [CustomValidators])
+    it("should test the matching of the two given passwords in case of different passwords" , function() {
+        var passwordObject: Control = new Control('AAAa1111');
+        var confirmPasswordObject: Control = new Control('Kutya1');
+        var group: ControlGroup = new  ControlGroup({
+            password: passwordObject,
+            confirmPassword: confirmPasswordObject
+        })
+        var passwordTester = matchingPasswords("password","confirmPassword");
+        var result = passwordTester(group);
+        expect(result["mismatchedPasswords"]).toEqual(true);
+    });
+    it("should test the matching of the two given passwords in case of same passwords" , function() {
+        var passwordObject: Control = new Control('AAAa1111');
+        var confirmPasswordObject: Control = new Control('AAAa1111');
+        var group: ControlGroup = new  ControlGroup({
+            password: passwordObject,
+            confirmPassword: confirmPasswordObject
+        })
+        var passwordTester = matchingPasswords("password","confirmPassword");
+        var result = passwordTester(group);
+        expect(result).not.toEqual(true);
+    });
+});
+
+
+describe('1st tests for configure Jasmine', () => {
     it(" is a 'test' test - Eredeti File", function() {
         var message = "Balazs3";
         expect(message).not.toMatch(/quux/);

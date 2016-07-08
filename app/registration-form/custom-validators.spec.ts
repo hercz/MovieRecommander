@@ -140,10 +140,9 @@ describe("CustomValidator test matchingPassword method", () => {
 });
 
 
-describe('1st tests for configure Jasmine', () => {
-    it(" is a 'test' test - Eredeti File", function() {
-        var message = "Balazs3";
-        expect(message).not.toMatch(/quux/);
+describe('Smoke-tester method for configure Jasmine from custom-validators.spec.ts', () => {
+    it(" is a 'test' test : true = true", function() {
+        expect(true).toEqual(true);
     });
 });
 

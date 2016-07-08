@@ -129,10 +129,9 @@ testing_1.describe("CustomValidator test matchingPassword method", function () {
         testing_1.expect(result).not.toEqual(true);
     });
 });
-testing_1.describe('1st tests for configure Jasmine', function () {
-    testing_1.it(" is a 'test' test - Eredeti File", function () {
-        var message = "Balazs3";
-        testing_1.expect(message).not.toMatch(/quux/);
+testing_1.describe('Smoke-tester method for configure Jasmine from custom-validators.spec.ts', function () {
+    testing_1.it(" is a 'test' test : true = true", function () {
+        testing_1.expect(true).toEqual(true);
     });
 });
 //# sourceMappingURL=custom-validators.spec.js.map

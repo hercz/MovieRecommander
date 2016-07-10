@@ -106,7 +106,18 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default" [disabled]="!registerForm.form.valid" (click)="gotToProfileFromReg()">Register</button>
+                <button type="submit" class="btn btn-default" [disabled]="!registerForm.form.valid" (click)="modal.open()">Register</button>
+                <modal #modal>
+                    <modal-header [show-close]="true">
+                        <h4 class="modal-title">Registration</h4>
+                    </modal-header>
+                    <modal-body>
+                        The registration was successful
+                    </modal-body>
+                    <modal-footer [show-default-buttons]="false">
+                        <button type="button" class="btn btn-primary" (click)="modal.close()" (click)="gotToProfileFromReg()">Ok</button>
+                    </modal-footer>
+                </modal>
             </div>
         </div>
     </form>

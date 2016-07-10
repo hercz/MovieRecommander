@@ -22,7 +22,7 @@ var AppComponent = (function () {
     AppComponent.prototype.sendLogOut = function () {
         var _this = this;
         this.loginHttpService.sendLogOut()
-            .subscribe(function (error) { return _this.errorMessage = error; });
+            .then(function (error) { return _this.errorMessage = error; });
     };
     AppComponent = __decorate([
         core_1.Component({

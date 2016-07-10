@@ -14,33 +14,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var Observable_1 = require("rxjs/Observable");
 var http_1 = require("@angular/http");
+var router_1 = require("@angular/router");
 var LogoutService = (function () {
-    function LogoutService(http) {
+    function LogoutService(http, router) {
         this.http = http;
+        this.router = router;
         this.serverLoginUrl = 'http://localhost:8081/logout'; // URL to web API
     }
     LogoutService.prototype.sendLogOut = function () {
+        var _this = this;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.serverLoginUrl, options)
-            .map(this.extractData)
+            .toPromise()
+            .then(function () {
+            _this.gotToProfile();
+        })
             .catch(this.handleError);
-    };
-    LogoutService.prototype.extractData = function (res) {
-        var body = res.json();
-        return body.data || {};
     };
     LogoutService.prototype.handleError = function (error) {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
+        if (error.status == 403) {
+            alert('You are not logged in!');
+        }
+        else {
+            alert("Server Error");
+        }
         console.error(errMsg); // log to console instead
         return Observable_1.Observable.throw(errMsg);
     };
+    LogoutService.prototype.gotToProfile = function () {
+        this.router.navigate(['/login']);
+    };
     LogoutService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, router_1.Router])
     ], LogoutService);
     return LogoutService;
 }());

@@ -39,8 +39,8 @@ var LoginFieldComponent = (function () {
         this.loginHttpService.sendLoginData(username, password, stayLoggedIn)
             .then(function (error) { return _this.errorMessage = error; });
     };
-    LoginFieldComponent.prototype.gotToProfileFromLog = function () {
-        this.router.navigate(['/profile']);
+    LoginFieldComponent.prototype.gotToRegistration = function () {
+        this.router.navigate(['/registration']);
     };
     LoginFieldComponent = __decorate([
         core_1.Component({

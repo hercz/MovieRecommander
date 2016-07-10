@@ -20,7 +20,7 @@ export class AppComponent {
 
     sendLogOut () {
         this.loginHttpService.sendLogOut()
-            .subscribe(
+            .then(
             error =>  this.errorMessage = <any>error);
     }
 }

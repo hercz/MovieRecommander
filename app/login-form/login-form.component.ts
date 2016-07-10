@@ -16,7 +16,6 @@ import {Observable} from "rxjs/Rx";
 export class LoginFieldComponent {
 //TODO: tipusossag like user
     errorMessage:string;
-    serverStatus:string;
     user:User = new User('', '', false);
     submitted:boolean = false;
 
@@ -41,14 +40,8 @@ export class LoginFieldComponent {
     sendLoginData(username:string, password:string, stayLoggedIn:boolean) {
         this.loginHttpService.sendLoginData(username, password, stayLoggedIn)
             .then(
-                // this.gotToProfileFromLog,
                 error => this.errorMessage = <any>error
             )
-    }
-    
-
-    gotToRegistration() {
-        this.router.navigate(['/registration']);
     }
 
     gotToProfileFromLog() {

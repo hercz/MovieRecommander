@@ -37,12 +37,7 @@ var LoginFieldComponent = (function () {
     LoginFieldComponent.prototype.sendLoginData = function (username, password, stayLoggedIn) {
         var _this = this;
         this.loginHttpService.sendLoginData(username, password, stayLoggedIn)
-            .then(
-        // this.gotToProfileFromLog,
-        function (error) { return _this.errorMessage = error; });
-    };
-    LoginFieldComponent.prototype.gotToRegistration = function () {
-        this.router.navigate(['/registration']);
+            .then(function (error) { return _this.errorMessage = error; });
     };
     LoginFieldComponent.prototype.gotToProfileFromLog = function () {
         this.router.navigate(['/profile']);

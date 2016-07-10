@@ -22,26 +22,28 @@ var LoginHttpService = (function () {
         this.serverLoginUrl = 'http://localhost:8081/login'; // URL to web API
     }
     LoginHttpService.prototype.sendLoginData = function (username, password, stayLoggedIn) {
+        var _this = this;
         var body = JSON.stringify({ username: username, password: password, stayLoggedIn: stayLoggedIn });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.serverLoginUrl, body, options)
             .toPromise()
+            .then(function () {
+            _this.gotToProfileFromLog();
+        })
             .catch(this.handleError);
     };
     LoginHttpService.prototype.handleError = function (error) {
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
+        if (error.status == 401) {
+            alert("Bad username or password!");
+        }
+        else {
+            alert("Server Error");
+        }
         console.log(errMsg); // log to console instead
         return Observable_1.Observable.throw(errMsg);
-    };
-    LoginHttpService.prototype.getServerStatus = function (response) {
-        var serverStatus = response.status;
-        console.log('status from service' + serverStatus);
-        return serverStatus;
-    };
-    LoginHttpService.prototype.gotToRegistration = function () {
-        this.router.navigate(['/registration']);
     };
     LoginHttpService.prototype.gotToProfileFromLog = function () {
         this.router.navigate(['/profile']);

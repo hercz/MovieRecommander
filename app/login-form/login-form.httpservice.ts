@@ -3,7 +3,6 @@
  */
 import {Injectable} from "@angular/core";
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
-import {User} from "./user";
 import {Observable} from "rxjs/Observable";
 import {Router} from "@angular/router";
 
@@ -21,28 +20,26 @@ export class LoginHttpService {
         let options = new RequestOptions({headers: headers});
         return this.http.post(this.serverLoginUrl, body, options)
             .toPromise()
-            // .then(this.gotToProfileFromLog)
+            .then(()=> {
+                this.gotToProfileFromLog();
+            })
             .catch(this.handleError);
     }
 
     private handleError(error:any) {
         let errMsg = (error.message) ? error.message :
             error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+        if (error.status == 401) {
+            alert("Bad username or password!");
+        }
+        else{
+            alert("Server Error")
+        }
         console.log(errMsg); // log to console instead
         return Observable.throw(errMsg);
     }
 
-    private getServerStatus(response : Response) {
-        let serverStatus = response.status;
-        console.log('status from service' + serverStatus);
-        return serverStatus;
-    }
-
-    gotToRegistration() {
-        this.router.navigate(['/registration']);
-    }
-
-    gotToProfileFromLog() {
+    private gotToProfileFromLog() {
         this.router.navigate(['/profile']);
     }
 }

@@ -3,11 +3,12 @@ import {Router} from "@angular/router";
 import {Control, FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from "@angular/common";
 import {CustomValidators, matchingPasswords} from "./custom-validators";
 import {RegistrationFormHttpService} from "./registration-form.httpService";
+import { MODAL_DIRECTIVES } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 
 @Component({
     selector: 'reg',
-    directives: [FORM_DIRECTIVES],
+    directives: [FORM_DIRECTIVES, MODAL_DIRECTIVES],
     providers: [RegistrationFormHttpService],
     templateUrl: 'app/registration-form/registration-form.component.html',
     styleUrls: ['app/registration-form/registration-form.component.css']

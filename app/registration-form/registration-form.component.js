@@ -13,6 +13,7 @@ var router_1 = require("@angular/router");
 var common_1 = require("@angular/common");
 var custom_validators_1 = require("./custom-validators");
 var registration_form_httpService_1 = require("./registration-form.httpService");
+var ng2_bs3_modal_1 = require('ng2-bs3-modal/ng2-bs3-modal');
 var RegistrationFieldComponent = (function () {
     //TODO: kiszervezes
     //TODO: magic numbers kiszervezes
@@ -56,7 +57,7 @@ var RegistrationFieldComponent = (function () {
     RegistrationFieldComponent = __decorate([
         core_1.Component({
             selector: 'reg',
-            directives: [common_1.FORM_DIRECTIVES],
+            directives: [common_1.FORM_DIRECTIVES, ng2_bs3_modal_1.MODAL_DIRECTIVES],
             providers: [registration_form_httpService_1.RegistrationFormHttpService],
             templateUrl: 'app/registration-form/registration-form.component.html',
             styleUrls: ['app/registration-form/registration-form.component.css']

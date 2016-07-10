@@ -29,7 +29,6 @@ export class RegistrationFieldComponent {
     password:Control;
     confirmPassword:Control;
     group:ControlGroup;
-    registeringDataGroup:ControlGroup;
 //TODO: kiszervezes
 //TODO: magic numbers kiszervezes
 //TODO: fuggvenyhivasok ksizervezese - validators.compose best practise?

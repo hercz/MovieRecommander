@@ -9,7 +9,7 @@ var app = express();
 // This responds a POST request for the /login
 app.post('/login', function (req, res) {
     console.log("Got a POST request for the /login");
-    // res.statusCode = 401; //401 - Unauthorized (Bad usernape or password)
+    // res.statusCode = 401; //401 - Unauthorized (Bad username or password)
     res.send();
 });
 

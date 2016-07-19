@@ -46,6 +46,7 @@ var LoginFieldComponent = (function () {
         core_1.Component({
             selector: 'log',
             templateUrl: 'app/login-form/login-form.component.html',
+            styleUrls: ['app/login-form/login-form.component.css'],
             providers: [login_form_httpservice_1.LoginHttpService]
         }), 
         __metadata('design:paramtypes', [router_1.Router, login_form_httpservice_1.LoginHttpService])

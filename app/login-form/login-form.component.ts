@@ -11,6 +11,7 @@ import {Observable} from "rxjs/Rx";
 @Component({
     selector: 'log',
     templateUrl: 'app/login-form/login-form.component.html',
+    styleUrls: ['app/login-form/login-form.component.css'],
     providers: [LoginHttpService]
 })
 export class LoginFieldComponent {

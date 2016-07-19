@@ -2,7 +2,7 @@
  * Created by herczkumihalybalazs on 2016.06.22..
  */
 export class User {
-    public fisrtName:string;
+    public firstName:string;
     public lastName:string;
     public nickName:string;
     public email:string;

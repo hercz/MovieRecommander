@@ -14,7 +14,7 @@ var common_1 = require("@angular/common");
 var custom_validators_1 = require("./custom-validators");
 var registration_form_httpService_1 = require("./registration-form.httpService");
 var ng2_bs3_modal_1 = require('ng2-bs3-modal/ng2-bs3-modal');
-// import {}
+var user_1 = require("../user");
 var RegistrationFieldComponent = (function () {
     //TODO: kiszervezes
     //TODO: magic numbers kiszervezes
@@ -23,6 +23,7 @@ var RegistrationFieldComponent = (function () {
         this.router = router;
         this.registrationFormHttpService = registrationFormHttpService;
         this.mode = 'Observable';
+        this.user = new user_1.User;
         this.firstName = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.maxLength(30), custom_validators_1.CustomValidators.nameFormat]));
         this.lastName = new common_1.Control('', common_1.Validators.compose([common_1.Validators.required, common_1.Validators.maxLength(50), custom_validators_1.CustomValidators.nameFormat]));
         this.nickName = new common_1.Control('', common_1.Validators.maxLength(20));
@@ -44,16 +45,30 @@ var RegistrationFieldComponent = (function () {
             confirmPassword: this.confirmPassword
         }, { validator: custom_validators_1.matchingPasswords('password', 'confirmPassword') });
     }
-    RegistrationFieldComponent.prototype.sendRegistrationData = function (firstName, lastName, nickName, email, gender, birthDate, address, password) {
+    RegistrationFieldComponent.prototype.sendRegistrationData = function (user) {
         var _this = this;
-        this.registrationFormHttpService.sendRegistrationData(firstName, lastName, nickName, email, gender, birthDate, address, password)
+        this.registrationFormHttpService.sendRegistrationData(user)
             .subscribe(function (error) { return _this.errorMessage = error; });
     };
-    RegistrationFieldComponent.prototype.gotToProfileFromReg = function () {
-        this.router.navigate(['/profile']);
+    RegistrationFieldComponent.prototype.instantiatesUserObject = function () {
+        this.user.firstName = this.firstName.value;
+        this.user.lastName = this.lastName.value;
+        this.user.nickName = this.nickName.value;
+        this.user.email = this.email.value;
+        this.user.address = this.address.value;
+        this.user.birthDate = this.birthDate.value;
+        this.user.gender = this.gender.value;
+        this.user.password = this.password.value;
     };
     RegistrationFieldComponent.prototype.onSubmit = function () {
-        this.sendRegistrationData(this.firstName.value, this.lastName.value, this.nickName.value, this.email.value, this.address.value, this.birthDate.value, this.gender.value, this.password.value);
+        //instantiates a user object
+        this.instantiatesUserObject();
+        //send that user object
+        this.sendRegistrationData(this.user);
+    };
+    RegistrationFieldComponent.prototype.gotToProfileFromReg = function () {
+        //navigate to Profile
+        this.router.navigate(['/profile']);
     };
     RegistrationFieldComponent = __decorate([
         core_1.Component({

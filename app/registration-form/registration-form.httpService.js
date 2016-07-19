@@ -19,11 +19,10 @@ var RegistrationFormHttpService = (function () {
         this.http = http;
         this.serverLoginUrl = 'http://localhost:8081/registration'; // URL to web API
     }
-    RegistrationFormHttpService.prototype.sendRegistrationData = function (firstName, lastName, nickName, email, gender, birthDate, address, password) {
-        var body = JSON.stringify({ firstName: firstName, lastName: lastName, nickName: nickName, email: email, gender: gender, birthDate: birthDate, address: address, password: password });
+    RegistrationFormHttpService.prototype.sendRegistrationData = function (user) {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.serverLoginUrl, body, options)
+        return this.http.post(this.serverLoginUrl, user, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -32,8 +31,6 @@ var RegistrationFormHttpService = (function () {
         return body.data || {};
     };
     RegistrationFormHttpService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        // We'd also dig deeper into the error to get a better message
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
         console.error(errMsg); // log to console instead

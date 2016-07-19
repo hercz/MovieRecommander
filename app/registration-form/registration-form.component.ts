@@ -4,7 +4,7 @@ import {Control, FormBuilder, Validators, ControlGroup, FORM_DIRECTIVES} from "@
 import {CustomValidators, matchingPasswords} from "./custom-validators";
 import {RegistrationFormHttpService} from "./registration-form.httpService";
 import { MODAL_DIRECTIVES } from 'ng2-bs3-modal/ng2-bs3-modal';
-// import {}
+import {User} from "../user";
 
 
 @Component({
@@ -18,6 +18,7 @@ import { MODAL_DIRECTIVES } from 'ng2-bs3-modal/ng2-bs3-modal';
 export class RegistrationFieldComponent {
     errorMessage:string;
     mode = 'Observable';
+    user:User=new User;
 
 
     firstName:Control;
@@ -30,6 +31,9 @@ export class RegistrationFieldComponent {
     password:Control;
     confirmPassword:Control;
     group:ControlGroup;
+
+
+
 //TODO: kiszervezes
 //TODO: magic numbers kiszervezes
 //TODO: fuggvenyhivasok ksizervezese - validators.compose best practise?
@@ -57,20 +61,35 @@ export class RegistrationFieldComponent {
         }, {validator: matchingPasswords('password', 'confirmPassword')});
     }
 
-    sendRegistrationData(firstName:string,lastName:string,nickName:string,email:string,gender:string,birthDate:string,
-                         address:string,password:string) {
-        this.registrationFormHttpService.sendRegistrationData(firstName,lastName,nickName,email,gender,birthDate,
-            address,password)
+    sendRegistrationData(user:User) {
+        this.registrationFormHttpService.sendRegistrationData(user)
             .subscribe(
                 error => this.errorMessage = <any>error);
     }
 
-    gotToProfileFromReg() {
-        this.router.navigate(['/profile']);
+    private instantiatesUserObject() {
+        this.user.firstName = this.firstName.value;
+        this.user.lastName = this.lastName.value;
+        this.user.nickName = this.nickName.value;
+        this.user.email = this.email.value;
+        this.user.address = this.address.value;
+        this.user.birthDate = this.birthDate.value;
+        this.user.gender = this.gender.value;
+        this.user.password = this.password.value;
     }
 
     onSubmit() {
-        this.sendRegistrationData(this.firstName.value,this.lastName.value,this.nickName.value,this.email.value,
-            this.address.value, this.birthDate.value, this.gender.value,this.password.value);
+        //instantiates a user object
+        this.instantiatesUserObject();
+
+        //send that user object
+        this.sendRegistrationData(this.user);
     }
+
+    gotToProfileFromReg() {
+        //navigate to Profile
+        this.router.navigate(['/profile']);
+    }
+
+
 }

@@ -21,12 +21,11 @@ var LoginHttpService = (function () {
         this.http = http;
         this.serverLoginUrl = 'http://localhost:8081/login'; // URL to web API
     }
-    LoginHttpService.prototype.sendLoginData = function (username, password, stayLoggedIn) {
+    LoginHttpService.prototype.sendLoginData = function (user) {
         var _this = this;
-        var body = JSON.stringify({ username: username, password: password, stayLoggedIn: stayLoggedIn });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.serverLoginUrl, body, options)
+        return this.http.post(this.serverLoginUrl, user, options)
             .toPromise()
             .then(function () {
             _this.gotToProfileFromLog();

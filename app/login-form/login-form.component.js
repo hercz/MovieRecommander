@@ -12,31 +12,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by herczkumihalybalazs on 2016.06.21..
  */
 var core_1 = require("@angular/core");
-var user_1 = require("./user");
+var user_1 = require("../user");
 var router_1 = require("@angular/router");
 var login_form_httpservice_1 = require("./login-form.httpservice");
 var LoginFieldComponent = (function () {
     function LoginFieldComponent(router, loginHttpService) {
         this.router = router;
         this.loginHttpService = loginHttpService;
-        this.user = new user_1.User('', '', false);
+        this.user = new user_1.User;
         this.submitted = false;
         this.mode = 'Observable';
         this.active = true;
     }
     LoginFieldComponent.prototype.onSubmit = function () {
-        this.sendLoginData(this.user.username, this.user.password, this.user.stayLoggedIn);
+        this.sendLoginData(this.user);
         this.submitted = true;
     };
-    LoginFieldComponent.prototype.userLogin = function () {
+    LoginFieldComponent.prototype.sendLoginData = function (user) {
         var _this = this;
-        this.user = new user_1.User('', '', false);
-        this.active = false;
-        setTimeout(function () { return _this.active = true; }, 0);
-    };
-    LoginFieldComponent.prototype.sendLoginData = function (username, password, stayLoggedIn) {
-        var _this = this;
-        this.loginHttpService.sendLoginData(username, password, stayLoggedIn)
+        this.loginHttpService.sendLoginData(user)
             .then(function (error) { return _this.errorMessage = error; });
     };
     LoginFieldComponent.prototype.gotToRegistration = function () {

@@ -14,6 +14,7 @@ var common_1 = require("@angular/common");
 var custom_validators_1 = require("./custom-validators");
 var registration_form_httpService_1 = require("./registration-form.httpService");
 var ng2_bs3_modal_1 = require('ng2-bs3-modal/ng2-bs3-modal');
+// import {}
 var RegistrationFieldComponent = (function () {
     //TODO: kiszervezes
     //TODO: magic numbers kiszervezes

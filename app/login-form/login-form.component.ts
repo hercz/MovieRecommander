@@ -2,7 +2,7 @@
  * Created by herczkumihalybalazs on 2016.06.21..
  */
 import {Component} from "@angular/core";
-import {User} from "./user";
+import {User} from "../user";
 import {Router} from "@angular/router";
 import {LoginHttpService} from "./login-form.httpservice";
 import {Observable} from "rxjs/Rx";
@@ -15,31 +15,23 @@ import {Observable} from "rxjs/Rx";
     providers: [LoginHttpService]
 })
 export class LoginFieldComponent {
-//TODO: tipusossag like user
     errorMessage:string;
-    user:User = new User('', '', false);
+    user:User = new User;
     submitted:boolean = false;
-
     mode = 'Observable';
 
     constructor(private router:Router, private loginHttpService:LoginHttpService) {
     }
 
     onSubmit() {
-        this.sendLoginData(this.user.username, this.user.password, this.user.stayLoggedIn);
+        this.sendLoginData(this.user);
         this.submitted = true;
     }
 
     active = true;
 
-    userLogin() {
-        this.user = new User('', '', false);
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-    }
-
-    sendLoginData(username:string, password:string, stayLoggedIn:boolean) {
-        this.loginHttpService.sendLoginData(username, password, stayLoggedIn)
+    sendLoginData(user:User) {
+        this.loginHttpService.sendLoginData(user)
             .then(
                 error => this.errorMessage = <any>error
             )

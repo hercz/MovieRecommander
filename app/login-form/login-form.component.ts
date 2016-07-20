@@ -4,7 +4,7 @@
 import {Component} from "@angular/core";
 import {User} from "../user";
 import {Router} from "@angular/router";
-import {LoginHttpService} from "./login-form.httpservice";
+import {LoginService} from "./login-form.service";
 import {Observable} from "rxjs/Rx";
 
 
@@ -12,7 +12,7 @@ import {Observable} from "rxjs/Rx";
     selector: 'log',
     templateUrl: 'app/login-form/login-form.component.html',
     styleUrls: ['app/login-form/login-form.component.css'],
-    providers: [LoginHttpService]
+    providers: [LoginService]
 })
 export class LoginFieldComponent {
     errorMessage:string;
@@ -20,7 +20,7 @@ export class LoginFieldComponent {
     submitted:boolean = false;
     mode = 'Observable';
 
-    constructor(private router:Router, private loginHttpService:LoginHttpService) {
+    constructor(private router:Router, private loginHttpService:LoginService) {
     }
 
     onSubmit() {

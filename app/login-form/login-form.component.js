@@ -14,7 +14,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var user_1 = require("../user");
 var router_1 = require("@angular/router");
-var login_form_httpservice_1 = require("./login-form.httpservice");
+var login_form_service_1 = require("./login-form.service");
 var LoginFieldComponent = (function () {
     function LoginFieldComponent(router, loginHttpService) {
         this.router = router;
@@ -41,9 +41,9 @@ var LoginFieldComponent = (function () {
             selector: 'log',
             templateUrl: 'app/login-form/login-form.component.html',
             styleUrls: ['app/login-form/login-form.component.css'],
-            providers: [login_form_httpservice_1.LoginHttpService]
+            providers: [login_form_service_1.LoginService]
         }), 
-        __metadata('design:paramtypes', [router_1.Router, login_form_httpservice_1.LoginHttpService])
+        __metadata('design:paramtypes', [router_1.Router, login_form_service_1.LoginService])
     ], LoginFieldComponent);
     return LoginFieldComponent;
 }());

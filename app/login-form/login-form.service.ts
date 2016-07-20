@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 import {User} from "../user";
 
 @Injectable()
-export class LoginHttpService {
+export class LoginService {
 
     constructor(private router:Router, private http:Http) {
     }

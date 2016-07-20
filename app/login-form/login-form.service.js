@@ -15,13 +15,13 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var Observable_1 = require("rxjs/Observable");
 var router_1 = require("@angular/router");
-var LoginHttpService = (function () {
-    function LoginHttpService(router, http) {
+var LoginService = (function () {
+    function LoginService(router, http) {
         this.router = router;
         this.http = http;
         this.serverLoginUrl = 'http://localhost:8081/login'; // URL to web API
     }
-    LoginHttpService.prototype.sendLoginData = function (user) {
+    LoginService.prototype.sendLoginData = function (user) {
         var _this = this;
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
@@ -32,7 +32,7 @@ var LoginHttpService = (function () {
         })
             .catch(this.handleError);
     };
-    LoginHttpService.prototype.handleError = function (error) {
+    LoginService.prototype.handleError = function (error) {
         var errMsg = (error.message) ? error.message :
             error.status ? error.status + " - " + error.statusText : 'Server error';
         if (error.status == 401) {
@@ -44,14 +44,14 @@ var LoginHttpService = (function () {
         console.log(errMsg); // log to console instead
         return Observable_1.Observable.throw(errMsg);
     };
-    LoginHttpService.prototype.gotToProfileFromLog = function () {
+    LoginService.prototype.gotToProfileFromLog = function () {
         this.router.navigate(['/profile']);
     };
-    LoginHttpService = __decorate([
+    LoginService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [router_1.Router, http_1.Http])
-    ], LoginHttpService);
-    return LoginHttpService;
+    ], LoginService);
+    return LoginService;
 }());
-exports.LoginHttpService = LoginHttpService;
-//# sourceMappingURL=login-form.httpservice.js.map
+exports.LoginService = LoginService;
+//# sourceMappingURL=login-form.service.js.map
